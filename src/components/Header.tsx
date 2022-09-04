@@ -15,13 +15,13 @@ const mainStyle: CSSProperties = {
 };
 
 const titleStyle: CSSProperties = {
-  fontSize: "36px",
+  fontSize: "max(2vw, 24px)",
   display: "flex",
   alignItems: "baseline",
 };
 
 const subtitleStyle: CSSProperties = {
-  fontSize: "24px",
+  fontSize: "max(1,5vw, 12px)",
   fontWeight: "bold",
 };
 

@@ -10,9 +10,10 @@ interface LayoutProps {
 }
 
 const globalStyle: CSSProperties = {
-  maxWidth: "1280px",
+  maxWidth: "90%",
   marginLeft: "auto",
   marginRight: "auto",
+  padding: "0 8vw",
   fontFamily: "Syne, serif",
   fontStyle: "normal",
   fontWeight: 400,
@@ -24,7 +25,7 @@ const navStyle: CSSProperties = {
 };
 
 const navItemStyle: CSSProperties = {
-  margin: "0 35px 0 35px",
+  margin: "0 2vw 0 2vw",
 };
 
 export default function Layout({ children, title, subTitle }: LayoutProps) {

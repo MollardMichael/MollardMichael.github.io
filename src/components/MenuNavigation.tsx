@@ -8,10 +8,6 @@ interface Props {
   style: CSSProperties;
 }
 
-const wrapperStyle: CSSProperties = {
-  position: "relative",
-};
-
 export default function MenuNavigation({ path, children, style }: Props) {
   const [isHover, setIsHover] = useState(false);
 
@@ -23,11 +19,14 @@ export default function MenuNavigation({ path, children, style }: Props) {
     setIsHover(false);
   };
 
+  const wrapperStyle: CSSProperties = {
+    position: "relative",
+    fontSize: "max(24px, 2vw)",
+  };
+
   const linkStyle: CSSProperties = {
     textDecoration: "none",
     color: "black",
-    fontSize: "40px",
-    lineHeight: "48px",
     opacity: isHover ? "35%" : 1,
     transition: "opacity 0.3s ease-out",
   };

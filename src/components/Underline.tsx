@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react";
 
 const underlineStyle: CSSProperties = {
   position: "absolute",
-  width: "98px",
+  width: "max(49px, 4vw)",
   height: "10px",
   backgroundColor: "#D9D9D9",
 };

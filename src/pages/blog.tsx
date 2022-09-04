@@ -8,7 +8,7 @@ type IndexProp = {};
 const IndexPage = ({}: IndexProp) => {
   return (
     <Layout title="Blog Posts" subTitle="by Michaël Mollard">
-      <h1>Works</h1>
+      <h1>Blog</h1>
       <div>...</div>
     </Layout>
   );
