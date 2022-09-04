@@ -11,7 +11,7 @@ This repository hold the code that is used to build my personal homepage
    npm start
    ```
 
-   The website will be available at http://localhost:8000/ (You will see it in your console when running the above command)
+   The website will be available at <http://localhost:8000/> (You will see it in your console when running the above command)
 
 ## Deployment
 
@@ -23,3 +23,7 @@ To release a new version run locally
 ```
 
 And then commit the public repository
+
+## Live Website
+
+The website is available at <https://mollardmichael.github.io>

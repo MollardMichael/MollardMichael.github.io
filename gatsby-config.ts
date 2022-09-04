@@ -43,6 +43,14 @@ const config: GatsbyConfig = {
       },
       __key: "pages",
     },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: ["Syne"],
+        },
+      },
+    },
   ],
 };
 
