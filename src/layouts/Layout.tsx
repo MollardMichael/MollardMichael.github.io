@@ -1,7 +1,8 @@
 import React, { CSSProperties } from "react";
-import Header from "./Header";
-import MenuNavigation from "./MenuNavigation";
+import Header from "../components/Header";
+import MenuNavigation from "../components/MenuNavigation";
 import "normalize.css/normalize.css";
+import "./index.css";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,7 +14,7 @@ const globalStyle: CSSProperties = {
   maxWidth: "90%",
   marginLeft: "auto",
   marginRight: "auto",
-  padding: "0 8vw",
+  padding: "0 8px",
   fontFamily: "Syne, serif",
   fontStyle: "normal",
   fontWeight: 400,
@@ -24,8 +25,14 @@ const navStyle: CSSProperties = {
   justifyContent: "space-around",
 };
 
+const firstNavItemStyle: CSSProperties = {
+  margin: "0 1em 0 0",
+};
 const navItemStyle: CSSProperties = {
-  margin: "0 2vw 0 2vw",
+  margin: "0 1em 0 1em",
+};
+const lastNavItemStyle: CSSProperties = {
+  margin: "0 0 0 1em",
 };
 
 export default function Layout({ children, title, subTitle }: LayoutProps) {
@@ -33,13 +40,13 @@ export default function Layout({ children, title, subTitle }: LayoutProps) {
     <div style={globalStyle}>
       <Header title={title} subtitle={subTitle}>
         <nav style={navStyle}>
-          <MenuNavigation style={navItemStyle} path="/">
+          <MenuNavigation style={firstNavItemStyle} path="/">
             Home
           </MenuNavigation>
           <MenuNavigation style={navItemStyle} path="/about">
             About
           </MenuNavigation>
-          <MenuNavigation style={navItemStyle} path="/blog">
+          <MenuNavigation style={lastNavItemStyle} path="/blog">
             Blog
           </MenuNavigation>
         </nav>

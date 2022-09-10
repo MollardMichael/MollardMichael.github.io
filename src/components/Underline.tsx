@@ -1,12 +1,15 @@
 import React, { CSSProperties } from "react";
 
-const underlineStyle: CSSProperties = {
-  position: "absolute",
-  width: "max(49px, 4vw)",
-  height: "10px",
-  backgroundColor: "#D9D9D9",
+type Props = {
+  type: "thin" | "big";
 };
 
-export default function Underline() {
+export default function Underline({ type }: Props) {
+  const underlineStyle: CSSProperties = {
+    position: "absolute",
+    width: "max(60px, 4.5vw)",
+    height: type === "thin" ? "0.2vw" : "0.6vw",
+    backgroundColor: "#D9D9D9",
+  };
   return <div style={underlineStyle}></div>;
 }

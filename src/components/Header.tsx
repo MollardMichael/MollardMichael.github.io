@@ -14,14 +14,18 @@ const mainStyle: CSSProperties = {
   justifyContent: "space-between",
 };
 
-const titleStyle: CSSProperties = {
-  fontSize: "max(2vw, 24px)",
+const titleWrapperStyle: CSSProperties = {
   display: "flex",
   alignItems: "baseline",
 };
 
+const titleStyle: CSSProperties = {
+  fontSize: "3em",
+  fontWeight: "bold",
+};
+
 const subtitleStyle: CSSProperties = {
-  fontSize: "max(1,5vw, 12px)",
+  fontSize: "0.8em",
   fontWeight: "bold",
 };
 
@@ -29,13 +33,13 @@ export default function Header({ children, title, subtitle }: HeaderProps) {
   return (
     <header style={headerStyle}>
       <div style={mainStyle}>
-        <div style={titleStyle}>
-          <h1>{title}</h1>
+        <div style={titleWrapperStyle}>
+          <h1 style={titleStyle}>{title}</h1>
           {subtitle && <div style={subtitleStyle}>{subtitle}</div>}
         </div>
         <div>{children}</div>
       </div>
-      <Underline></Underline>
+      <Underline type="big"></Underline>
     </header>
   );
 }

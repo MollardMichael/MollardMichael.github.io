@@ -21,7 +21,7 @@ export default function MenuNavigation({ path, children, style }: Props) {
 
   const wrapperStyle: CSSProperties = {
     position: "relative",
-    fontSize: "max(24px, 2vw)",
+    fontSize: "2em",
   };
 
   const linkStyle: CSSProperties = {
@@ -44,7 +44,7 @@ export default function MenuNavigation({ path, children, style }: Props) {
       >
         {children}
       </Link>
-      <Underline></Underline>
+      <Underline type="thin"></Underline>
     </div>
   );
 }

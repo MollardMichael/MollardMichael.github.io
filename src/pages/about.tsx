@@ -1,15 +1,16 @@
 import * as React from "react";
 import { graphql, HeadFC, useStaticQuery } from "gatsby";
-import Layout from "../components/Layout";
+import Layout from "../layouts/Layout";
 import { SEO } from "../components/SEO";
 import Img from "gatsby-image";
+import Bio from "../components/Bio";
 
-type IndexProp = {};
+type AboutProp = {};
 
 const socialStyle: React.CSSProperties = {};
 const bioStyle: React.CSSProperties = {};
 
-const IndexPage = ({}: IndexProp) => {
+const AboutPage = ({}: AboutProp) => {
   const data = useStaticQuery(graphql`
     query {
       file(relativePath: { eq: "me.jpeg" }) {
@@ -37,11 +38,10 @@ const IndexPage = ({}: IndexProp) => {
         backends (from applications to infrastructure)
       </p>
       <p>
-        I am currently working for a company called{" "}
-        <a href="https://swan.io">Swan</a> where I lead the development of
-        payment solutions for the EU market. We try to empower any company by
-        giving them (and their clients) direct access to features that only bank
-        are able to provide.
+        I am currently working for <a href="https://swan.io">Swan</a> where I
+        lead the development of payment solutions for the EU market. We try to
+        empower any company by giving them (and their clients) direct access to
+        features that only bank are able to provide.
       </p>
       <p>
         You'll find on this page, some of the things I care about. I started a
@@ -49,24 +49,11 @@ const IndexPage = ({}: IndexProp) => {
         want to understand specific topics. You'll also find some of the project
         I've done either for work or because I had a need for them myself.
       </p>
-      <div style={socialStyle}>
-        <div>
-          linkedin:
-          <a href="https://www.linkedin.com/in/mmollard/">
-            https://www.linkedin.com/in/mmollard/
-          </a>
-        </div>
-        <div>
-          blog :
-          <a href="https://mollardmichael.github.io/blog">
-            https://mollardmichael.github.io/blog
-          </a>
-        </div>
-      </div>
+      <Bio />
     </Layout>
   );
 };
 
-export default IndexPage;
+export default AboutPage;
 
 export const Head: HeadFC = () => <SEO title="Michaël Mollard's bio"></SEO>;
