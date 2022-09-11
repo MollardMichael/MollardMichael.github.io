@@ -35,6 +35,10 @@ const lastNavItemStyle: CSSProperties = {
   margin: "0 0 0 1em",
 };
 
+const mainStyle: CSSProperties = {
+  paddingBottom: "2em",
+};
+
 export default function Layout({ children, title, subTitle }: LayoutProps) {
   return (
     <div style={globalStyle}>
@@ -51,7 +55,7 @@ export default function Layout({ children, title, subTitle }: LayoutProps) {
           </MenuNavigation>
         </nav>
       </Header>
-      <main>{children}</main>
+      <main style={mainStyle}>{children}</main>
     </div>
   );
 }
