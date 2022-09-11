@@ -1,0 +1,106 @@
+---
+type: Blog
+image: hero.png
+title: "Ever wondered how to connect to a sftp directly from your application?"
+date: "2022-09-11"
+tags: ["sftp", "typescript", "tests"]
+path: "/blog/sftp-mock-server"
+---
+
+Nowadays, it's way more likely that you'll need to connect to Buckets on some cloud provider but sometimes (and it happened to me),
+you might find yourself with the need to connect to a sftp server directly. If this is your case too, I hope this article will be able to help you set that up with an awesome test coverage.
+
+## What should I do when I try to connect to a SFTP.
+
+First thing first, you should try to avoid doing that. If possible, you can look into how to synchronize the SFTP to a Cloud Bucket. (For example, you can look into [AWS](https://aws.amazon.com/fr/aws-transfer-family/))
+
+Now If you're still here, it might mean that this is not a choice for you. Or you're just that curious to know how that would be done directly from your application. If so you're in luck so buckle up!
+
+### Chose a client library.
+
+When trying to connect to a new protocol, picking up a good library is always a must.
+[SSH2](https://github.com/mscdex/ssh2) seems like the best solution out there to handle ssh (and thus sftp) workflows.
+Unfortunately, it's a bit too low level for a casual use of a sftp server (you will need to look into if if you're looking to get crafty with your sftp server but then this article won't help you anymore :D)
+
+That is why, I would direct you to [ssh2-sftp-client](https://github.com/theophilusx/ssh2-sftp-client). A simple wrapper that provide a usable promise API over ssh2.
+
+### Connect to your SFTP server
+
+This is the easy part of all of this.
+
+Let's start by getting our package.json in order
+
+```shell
+npm install ssh2-sftp-client
+
+yarn add ssh2-sftp-client
+```
+
+And then in the place you need to connect to the sftp server just go with something along the line of
+
+```typescript
+import Client from "ssh2-sftp-client";
+
+const client = new Client();
+await client.connect({
+  host: "127.0.0.1", // You sftp server IP address
+  port: 9999, // You sftp server port
+  username: "test", // Your username
+  password: "test", // You can also opt in for private key authentication
+});
+```
+
+Once connected, you can do most operation that you'd like to using the client
+
+```typescript
+await client.put(Buffer.from("Content"), "/directory/filename.extension");
+await client.get("/directory/filename.extension");
+const files = await client.list("/directory");
+```
+
+## Thanks so what's left?
+
+If you're building a quick poc then you're all set but if you're trying to add this to an application, you're probably wondering how you're going to make your test suite pass.
+If you're only doing unit tests, you can probably get away by mocking the client library but if you also want some integration/e2e tests, you might want to setup a sftp server to respond to your client calls.
+
+I would argue that you have two main choice to do this
+
+- Look for a docker image of a sftp server, understand it's configuration and add it to both your local env and the CI setup.
+- Install and a library that I built specially for this -> [sftp-mock-server](https://github.com/MollardMichael/sftp-mock-server)
+
+### Set it up
+
+```shell
+npm install --save-dev @micham/sftp-mock-server
+
+yarn add -D @micham/sftp-mock-server
+```
+
+### See it in action
+
+```typescript
+describe("MySFTPClient", () => {
+  let mockServer: Server;
+  beforeEach(async () => {
+    mockServer = await createSftpMockServer({
+      port: "9999",
+      hostname: "127.0.0.1",
+      debug: (msg: string) => logger.debug(msg),
+    });
+  });
+
+  afterEach(async () => {
+    await closeServer(mockServer);
+  });
+
+  it("should be able to write file to the SFTP server", () => {
+    // GIVEN
+    const client = new MySFTPClient();
+
+    // WHEN
+    const result = client.doMyThingUsingSftp();
+
+    // THEN check result
+  });
+});
+```

@@ -5,6 +5,19 @@ import Layout from "../layouts/Layout";
 import Img from "gatsby-image";
 import { MDXProvider } from "@mdx-js/react";
 import Bio from "../components/Bio";
+import Code from "../components/Code";
+
+const components = {
+  pre: ({ children: { props } }: any) => {
+    return (
+      <Code
+        codeString={props.children.trim()}
+        language={props.className && props.className.replace("language-", "")}
+        {...props}
+      />
+    );
+  },
+};
 
 const BlogTemplate = ({ data: { mdx: post }, children }: any) => {
   return (
@@ -18,7 +31,7 @@ const BlogTemplate = ({ data: { mdx: post }, children }: any) => {
             alt="Thumbnail"
           />
         </header>
-        <MDXProvider>{children}</MDXProvider>
+        <MDXProvider components={components}>{children}</MDXProvider>
         <footer>
           <Bio />
         </footer>
@@ -43,7 +56,7 @@ export const pageQuery = graphql`
         date(formatString: "YYYY")
         image {
           childImageSharp {
-            fixed(width: 225, height: 225) {
+            fixed(width: 450, height: 450) {
               ...GatsbyImageSharpFixed
             }
           }
