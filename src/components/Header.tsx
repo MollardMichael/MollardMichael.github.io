@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react";
+import { useResponsive } from "../hooks/useResponsive";
 import Underline from "./Underline";
 
 interface HeaderProps {
@@ -8,28 +9,42 @@ interface HeaderProps {
 }
 
 const headerStyle: CSSProperties = {};
-const mainStyle: CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-};
-
-const titleWrapperStyle: CSSProperties = {
-  display: "flex",
-  alignItems: "baseline",
-};
 
 const titleStyle: CSSProperties = {
   fontSize: "3em",
   fontWeight: "bold",
-};
-
-const subtitleStyle: CSSProperties = {
-  fontSize: "0.8em",
-  fontWeight: "bold",
+  margin: "0",
 };
 
 export default function Header({ children, title, subtitle }: HeaderProps) {
+  const { media } = useResponsive();
+
+  const mainStyle: CSSProperties = {
+    padding: "2em 0",
+    display: "flex",
+    alignItems: "baseline",
+    justifyContent: "space-between",
+    ...media({
+      mobile: { flexFlow: "column" },
+      desktop: { flexFlow: "row" },
+    }),
+  };
+
+  const titleWrapperStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "baseline",
+    columnGap: "0.5em",
+    ...media({
+      mobile: { flexFlow: "column" },
+      desktop: { flexFlow: "row" },
+    }),
+  };
+
+  const subtitleStyle: CSSProperties = {
+    fontSize: "1em",
+    fontWeight: "bold",
+  };
+
   return (
     <header style={headerStyle}>
       <div style={mainStyle}>

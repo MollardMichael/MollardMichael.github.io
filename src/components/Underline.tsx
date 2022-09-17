@@ -6,9 +6,8 @@ type Props = {
 
 export default function Underline({ type }: Props) {
   const underlineStyle: CSSProperties = {
-    position: "absolute",
-    width: "max(60px, 4.5vw)",
-    height: type === "thin" ? "0.2vw" : "0.6vw",
+    width: "2.5em",
+    height: type === "thin" ? "0.1em" : "0.3em",
     backgroundColor: "#D9D9D9",
   };
   return <div style={underlineStyle}></div>;

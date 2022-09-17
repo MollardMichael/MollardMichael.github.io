@@ -4,13 +4,24 @@ import Layout from "../layouts/Layout";
 import { SEO } from "../components/SEO";
 import Img from "gatsby-image";
 import Bio from "../components/Bio";
+import { useResponsive } from "../hooks/useResponsive";
 
 type AboutProp = {};
 
-const socialStyle: React.CSSProperties = {};
 const bioStyle: React.CSSProperties = {};
 
 const AboutPage = ({}: AboutProp) => {
+  const { media } = useResponsive();
+  const mainStyle: React.CSSProperties = {
+    ...media<React.CSSProperties>({
+      desktop: {
+        maxWidth: "70%",
+      },
+      mobile: {
+        maxWidth: "100%",
+      },
+    }),
+  };
   const data = useStaticQuery(graphql`
     query {
       file(relativePath: { eq: "me.jpeg" }) {
@@ -26,7 +37,7 @@ const AboutPage = ({}: AboutProp) => {
   `);
 
   return (
-    <Layout title="About">
+    <Layout title="About" mainStyle={mainStyle}>
       <h1>Michaël Mollard</h1>
       <Img fixed={data.file.childImageSharp.fixed} alt="Picture of me" />
       <p style={bioStyle}>

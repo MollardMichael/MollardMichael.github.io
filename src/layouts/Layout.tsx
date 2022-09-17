@@ -3,59 +3,62 @@ import Header from "../components/Header";
 import MenuNavigation from "../components/MenuNavigation";
 import "normalize.css/normalize.css";
 import "./index.css";
+import { useResponsive } from "../hooks/useResponsive";
 
 interface LayoutProps {
   children: React.ReactNode;
   title: string;
   subTitle?: string;
+  mainStyle?: React.CSSProperties;
 }
 
-const globalStyle: CSSProperties = {
-  maxWidth: "90%",
-  marginLeft: "auto",
-  marginRight: "auto",
-  padding: "0 8px",
-  fontFamily: "Syne, serif",
-  fontStyle: "normal",
-  fontWeight: 400,
-};
+export default function Layout({
+  children,
+  title,
+  subTitle,
+  mainStyle,
+}: LayoutProps) {
+  const { media } = useResponsive();
 
-const navStyle: CSSProperties = {
-  display: "flex",
-  justifyContent: "space-around",
-};
+  const navStyle: CSSProperties = {
+    display: "flex",
+    justifyContent: "space-around",
+    marginTop: "2em",
+    fontSize: "0.8em",
+    ...media({
+      desktop: {
+        columnGap: "4em",
+      },
+      mobile: {
+        columnGap: "2em",
+      },
+    }),
+  };
 
-const firstNavItemStyle: CSSProperties = {
-  margin: "0 1em 0 0",
-};
-const navItemStyle: CSSProperties = {
-  margin: "0 1em 0 1em",
-};
-const lastNavItemStyle: CSSProperties = {
-  margin: "0 0 0 1em",
-};
+  const globalStyle: CSSProperties = {
+    fontFamily: "Syne, serif",
+    fontStyle: "normal",
+    fontWeight: 400,
+    ...media({
+      desktop: {
+        padding: "1em 4em",
+      },
+      mobile: {
+        padding: "1em 2em",
+      },
+    }),
+  };
 
-const mainStyle: CSSProperties = {
-  paddingBottom: "2em",
-};
-
-export default function Layout({ children, title, subTitle }: LayoutProps) {
   return (
     <div style={globalStyle}>
       <Header title={title} subtitle={subTitle}>
         <nav style={navStyle}>
-          <MenuNavigation style={firstNavItemStyle} path="/">
-            Home
-          </MenuNavigation>
-          <MenuNavigation style={navItemStyle} path="/about">
-            About
-          </MenuNavigation>
-          <MenuNavigation style={lastNavItemStyle} path="/blog">
-            Blog
-          </MenuNavigation>
+          <MenuNavigation path="/">Home</MenuNavigation>
+          <MenuNavigation path="/about">About</MenuNavigation>
+          <MenuNavigation path="/blog">Blog</MenuNavigation>
         </nav>
       </Header>
-      <main style={mainStyle}>{children}</main>
+      <main style={mainStyle || {}}>{children}</main>
     </div>
   );
 }

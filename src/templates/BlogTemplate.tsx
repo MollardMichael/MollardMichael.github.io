@@ -6,6 +6,7 @@ import Img from "gatsby-image";
 import { MDXProvider } from "@mdx-js/react";
 import Bio from "../components/Bio";
 import Code from "../components/Code";
+import { useResponsive } from "../hooks/useResponsive";
 
 const components = {
   pre: ({ children: { props } }: any) => {
@@ -20,16 +21,36 @@ const components = {
 };
 
 const BlogTemplate = ({ data: { mdx: post }, children }: any) => {
+  const { media } = useResponsive();
+  const mainStyle: React.CSSProperties = {
+    ...media<React.CSSProperties>({
+      desktop: {
+        maxWidth: "70%",
+      },
+      mobile: {
+        maxWidth: "100%",
+      },
+    }),
+  };
+
   return (
-    <Layout title={post.frontmatter.type}>
+    <Layout title={post.frontmatter.type} mainStyle={mainStyle}>
       <article itemScope itemType="http://schema.org/Article">
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
-          <Img
-            fixed={post.frontmatter.image.childImageSharp.fixed}
-            alt="Thumbnail"
-          />
+          {post.frontmatter.image.childImageSharp ? (
+            <Img
+              fixed={post.frontmatter.image.childImageSharp.fixed}
+              alt="Thumbnail"
+            />
+          ) : (
+            <img
+              src={post.frontmatter.image.publicURL}
+              alt="Thumbnail"
+              style={{ maxWidth: "400px" }}
+            />
+          )}
         </header>
         <MDXProvider components={components}>{children}</MDXProvider>
         <footer>
@@ -55,6 +76,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "YYYY")
         image {
+          publicURL
           childImageSharp {
             fixed(width: 450, height: 450) {
               ...GatsbyImageSharpFixed

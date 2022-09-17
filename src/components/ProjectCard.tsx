@@ -4,7 +4,8 @@ import { Link } from "gatsby";
 
 type Props = {
   id: string;
-  image: FluidObject;
+  imagePublicURL: string;
+  image?: FluidObject;
   title: string;
   year: string;
   excerpt: string;
@@ -18,6 +19,7 @@ export default function ProjectCard({
   title,
   year,
   excerpt,
+  imagePublicURL,
   tags,
   path,
 }: Props) {
@@ -29,7 +31,11 @@ export default function ProjectCard({
 
   return (
     <div style={projectCardStyle} key={id}>
-      <Img fluid={image} alt="Picture of project" />
+      {image ? (
+        <Img fluid={image} alt="Picture of project" />
+      ) : (
+        <img src={imagePublicURL} alt="Picture of project" />
+      )}
       <Link style={{ color: "black" }} to={path}>
         <h2>{title}</h2>
       </Link>

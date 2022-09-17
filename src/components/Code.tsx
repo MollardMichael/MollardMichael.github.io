@@ -2,9 +2,14 @@ import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/vsDark";
 import React, { CSSProperties, useState } from "react";
 import { copyToClipboard } from "../utils/copy-to-clipboard";
+import Copy from "../images/logo/copy.svg";
+import ReactTooltip from "react-tooltip";
+
+const wrapperStyle: CSSProperties = {
+  position: "relative",
+};
 
 const preStyle: CSSProperties = {
-  position: "relative",
   textAlign: "left",
   margin: "1em 0",
   padding: "0.5em",
@@ -27,13 +32,14 @@ const Code = ({
   language: Language;
 }) => {
   const [isHover, setIsHover] = useState(false);
+
   const copyStyle: CSSProperties = {
     position: "absolute",
+    top: "0.25rem",
     right: "0.25rem",
-    border: "0",
-    borderRadius: "3px",
-    margin: "0.25em",
     opacity: isHover ? "1" : "0.3",
+    width: "2em",
+    height: "2em",
     cursor: "pointer",
   };
 
@@ -57,27 +63,36 @@ const Code = ({
       theme={theme}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={className} style={{ ...style, ...preStyle }}>
+        <div style={wrapperStyle}>
           <button
             style={copyStyle}
             onClick={handleClickCopy}
             onMouseEnter={handleMouseEnterCopy}
             onMouseLeave={handleMouseLeaveCopy}
+            data-tip="Copied to clipboard"
           >
-            Copy
+            <Copy />
           </button>
-
-          {tokens.map((line, i) => (
-            <div {...getLineProps({ line, key: i })}>
-              <span style={lineNumberStyle}>
-                {String(i + 1).padStart(String(tokens.length).length, " ")}
-              </span>
-              {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
-        </pre>
+          <ReactTooltip
+            delayHide={2000}
+            event="click"
+            type="success"
+            effect="solid"
+            eventOff="click"
+          />
+          <pre className={className} style={{ ...style, ...preStyle }}>
+            {tokens.map((line, i) => (
+              <div {...getLineProps({ line, key: i })}>
+                <span style={lineNumberStyle}>
+                  {String(i + 1).padStart(String(tokens.length).length, " ")}
+                </span>
+                {line.map((token, key) => (
+                  <span {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        </div>
       )}
     </Highlight>
   );

@@ -9,9 +9,9 @@ type IndexProp = {};
 const IndexPage = ({}: IndexProp) => {
   const projectsStyle: React.CSSProperties = {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    columnGap: "12vw",
-    rowGap: "6vw",
+    gridTemplateColumns: "repeat(2, minmax(0,1fr))",
+    columnGap: "3em",
+    rowGap: "2em",
   };
 
   const data = useStaticQuery(graphql`
@@ -26,6 +26,7 @@ const IndexPage = ({}: IndexProp) => {
             frontmatter {
               type
               image {
+                publicURL
                 childImageSharp {
                   fluid(maxWidth: 800) {
                     ...GatsbyImageSharpFluid
@@ -50,7 +51,8 @@ const IndexPage = ({}: IndexProp) => {
         {data.allMdx.edges.map(({ node }: any) => (
           <ProjectCard
             id={node.id}
-            image={node.frontmatter.image.childImageSharp.fluid}
+            imagePublicURL={node.frontmatter.image.publicURL}
+            image={node.frontmatter.image.childImageSharp?.fluid}
             title={node.frontmatter.title}
             year={node.frontmatter.date}
             excerpt={node.excerpt}

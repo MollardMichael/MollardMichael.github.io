@@ -5,7 +5,7 @@ import Underline from "./Underline";
 interface Props {
   path: string;
   children: React.ReactNode;
-  style: CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function MenuNavigation({ path, children, style }: Props) {
@@ -34,7 +34,7 @@ export default function MenuNavigation({ path, children, style }: Props) {
   const activeLinkStyle: CSSProperties = { ...linkStyle, opacity: "35%" };
 
   return (
-    <div style={{ ...wrapperStyle, ...style }}>
+    <div style={{ ...wrapperStyle, ...(style || {}) }}>
       <Link
         style={linkStyle}
         activeStyle={activeLinkStyle}
