@@ -3,11 +3,20 @@ import * as React from "react";
 const BREAKPOINT = 992;
 const isDesktop = (width: number, breakpoint: number) => width >= breakpoint;
 
+const isBrowser = () => typeof window !== "undefined";
+
 function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
+  if (isBrowser()) {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height,
+    };
+  }
+
   return {
-    width,
-    height,
+    width: 0,
+    height: 0,
   };
 }
 
@@ -24,14 +33,9 @@ export const useResponsive = (breakpoint: number | undefined = BREAKPOINT) => {
 
   React.useEffect(() => {
     const handleResize = () => {
-      console.log(
-        "isDesktop",
-        getWindowDimensions().width,
-        isDesktop(getWindowDimensions().width, breakpoint)
-      );
       setDesktop(isDesktop(getWindowDimensions().width, breakpoint));
     };
-    window.addEventListener("resize", handleResize);
+    if (isBrowser()) window.addEventListener("resize", handleResize);
 
     // We might have missed an update between calling `get` in render and
     // `addEventListener` in this handler, so we set it here. If there was
@@ -39,7 +43,7 @@ export const useResponsive = (breakpoint: number | undefined = BREAKPOINT) => {
     setDesktop(isDesktop(getWindowDimensions().width, breakpoint));
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      if (isBrowser()) window.removeEventListener("resize", handleResize);
     };
   }, [breakpoint]);
 
