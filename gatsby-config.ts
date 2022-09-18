@@ -28,7 +28,19 @@ const config: GatsbyConfig = {
         icon: "src/images/icon.png",
       },
     },
-    "gatsby-plugin-mdx",
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 650,
+            },
+          },
+        ],
+      },
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {

@@ -33,12 +33,23 @@ const BlogTemplate = ({ data: { mdx: post }, children }: any) => {
     }),
   };
 
+  const articleStyle: React.CSSProperties = {
+    paddingBottom: "1em",
+  };
+
   return (
     <Layout title={post.frontmatter.type} mainStyle={mainStyle}>
-      <article itemScope itemType="http://schema.org/Article">
-        <header>
+      <article
+        itemScope
+        itemType="http://schema.org/Article"
+        style={articleStyle}
+      >
+        <section>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <p>
+            {post.frontmatter.date}{" "}
+            {post.frontmatter.tags.map((tag: string) => `#${tag}`).join(" ")}
+          </p>
           {post.frontmatter.image.childImageSharp ? (
             <Img
               fixed={post.frontmatter.image.childImageSharp.fixed}
@@ -51,12 +62,14 @@ const BlogTemplate = ({ data: { mdx: post }, children }: any) => {
               style={{ maxWidth: "400px" }}
             />
           )}
-        </header>
-        <MDXProvider components={components}>{children}</MDXProvider>
-        <footer>
-          <Bio />
-        </footer>
+        </section>
+        <section>
+          <MDXProvider components={components}>{children}</MDXProvider>
+        </section>
       </article>
+      <footer>
+        <Bio />
+      </footer>
     </Layout>
   );
 };
@@ -74,7 +87,8 @@ export const pageQuery = graphql`
       frontmatter {
         type
         title
-        date(formatString: "YYYY")
+        tags
+        date(formatString: "MMM YYYY")
         image {
           publicURL
           childImageSharp {

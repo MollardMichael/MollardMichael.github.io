@@ -15,8 +15,8 @@ function getWindowDimensions() {
   }
 
   return {
-    width: 0,
-    height: 0,
+    width: 1200,
+    height: 800,
   };
 }
 
@@ -35,15 +35,11 @@ export const useResponsive = (breakpoint: number | undefined = BREAKPOINT) => {
     const handleResize = () => {
       setDesktop(isDesktop(getWindowDimensions().width, breakpoint));
     };
-    if (isBrowser()) window.addEventListener("resize", handleResize);
-
-    // We might have missed an update between calling `get` in render and
-    // `addEventListener` in this handler, so we set it here. If there was
-    // no change, React will filter out this update as a no-op.
+    window.addEventListener("resize", handleResize);
     setDesktop(isDesktop(getWindowDimensions().width, breakpoint));
 
     return () => {
-      if (isBrowser()) window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [breakpoint]);
 

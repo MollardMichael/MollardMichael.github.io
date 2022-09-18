@@ -29,7 +29,7 @@ const IndexPage = ({}: IndexProp) => {
               tags
               title
               path
-              date(formatString: "YYYY")
+              date(formatString: "MMM YYYY")
             }
           }
         }
