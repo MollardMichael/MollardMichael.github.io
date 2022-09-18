@@ -54,8 +54,8 @@ export default function Layout({
       <Header title={title} subtitle={subTitle}>
         <nav style={navStyle}>
           <MenuNavigation path="/">Home</MenuNavigation>
-          <MenuNavigation path="/about">About</MenuNavigation>
-          <MenuNavigation path="/blog">Blog</MenuNavigation>
+          <MenuNavigation path="/about/">About</MenuNavigation>
+          <MenuNavigation path="/blog/">Blog</MenuNavigation>
         </nav>
       </Header>
       <main style={mainStyle || {}}>{children}</main>
