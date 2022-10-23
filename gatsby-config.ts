@@ -15,9 +15,9 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: "gatsby-plugin-google-gtag",
       options: {
-        trackingId: "G-K9PP50WDBQ",
+        trackingIds: ["G-K9PP50WDBQ"],
       },
     },
     "gatsby-plugin-image",
