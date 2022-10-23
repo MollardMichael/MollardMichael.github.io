@@ -34,7 +34,11 @@ export default function ProjectCard({
       {image ? (
         <Img fluid={image} alt="Picture of project" />
       ) : (
-        <img src={imagePublicURL} alt="Picture of project" />
+        <img
+          style={{ maxWidth: "420px" }}
+          src={imagePublicURL}
+          alt="Picture of project"
+        />
       )}
       <Link style={{ color: "black" }} to={path}>
         <h2>{title}</h2>

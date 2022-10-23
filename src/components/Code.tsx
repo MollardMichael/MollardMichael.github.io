@@ -79,6 +79,7 @@ const Code = ({
             type="success"
             effect="solid"
             eventOff="click"
+            isCapture={true}
           />
           <pre className={className} style={{ ...style, ...preStyle }}>
             {tokens.map((line, i) => (

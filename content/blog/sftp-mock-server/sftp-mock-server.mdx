@@ -1,8 +1,8 @@
 ---
 type: Blog
 image: sftp.svg
-title: "Ever wondered how to connect to a sftp directly from your application?"
-date: "2022-09-11"
+title: "Ever wondered how to connect to a sftp directly from your typescript application?"
+date: "2022-10-11"
 tags: ["sftp", "typescript", "tests"]
 path: "/blog/sftp-mock-server"
 ---
@@ -53,17 +53,24 @@ await client.connect({
 Once connected, you can do most operation that you'd like to using the client
 
 ```typescript
+// Write "Content" in a file on the server
 await client.put(Buffer.from("Content"), "/directory/filename.extension");
-await client.get("/directory/filename.extension");
+
+// Get back the content of the file
+const content = await client.get("/directory/filename.extension");
+
+// List all files in a directory
 const files = await client.list("/directory");
 ```
 
-## Thanks so what's left?
+If you're not familiar with SFTP, you could give the ssh2 documentation to get an overview of the available commands [here](https://github.com/mscdex/ssh2/blob/master/SFTP.md)
 
-If you're building a quick poc then you're all set but if you're trying to add this to an application, you're probably wondering how you're going to make your test suite pass.
+## Okay, so what's left?
+
+If you're building a quick POC then you're all set but if you're trying to add this to an application, you're probably wondering how you're going to make your test suite run smoothly.
 If you're only doing unit tests, you can probably get away by mocking the client library but if you also want some integration/e2e tests, you might want to setup a sftp server to respond to your client calls.
 
-I would argue that you have two main choice to do this
+I would argue that you have two main choices to do this
 
 - Look for a docker image of a sftp server, understand it's configuration and add it to both your local env and the CI setup.
 - Install and a library that I built specially for this -> [sftp-mock-server](https://github.com/MollardMichael/sftp-mock-server)
