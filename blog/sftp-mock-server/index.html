@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 4.23.0"/><style data-href="/styles.d6b4dc9d8e481c20abde.css" data-identity="gatsby-global-css">/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{-webkit-text-size-adjust:100%;line-height:1.15}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}body{font-size:1em;line-height:1.3}</style><title data-gatsby-head="true">Ever wondered how to connect to a sftp directly from your typescript application?</title><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script><link rel="sitemap" type="application/xml" href="/sitemap/sitemap-index.xml"/><link rel="icon" href="/favicon-32x32.png?v=d79107f813d41aa446d5c5d2b6200ac0" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=d79107f813d41aa446d5c5d2b6200ac0"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div style="font-family:Syne, serif;font-style:normal;font-weight:400;padding:1em 4em"><header><div style="padding:2em 0;display:flex;align-items:baseline;justify-content:space-between;flex-flow:row"><div style="display:flex;align-items:baseline;column-gap:0.5em;flex-flow:row"><h1 style="font-size:3em;font-weight:bold;margin:0">Blog</h1></div><div><nav style="display:flex;justify-content:space-around;margin-top:2em;font-size:0.8em;column-gap:4em"><div style="position:relative;font-size:2em"><a style="text-decoration:none;color:black;opacity:1;transition:opacity 0.3s ease-out" href="/">Home</a><div style="width:2.5em;height:0.1em;background-color:#D9D9D9"></div></div><div style="position:relative;font-size:2em"><a style="text-decoration:none;color:black;opacity:1;transition:opacity 0.3s ease-out" href="/about/">About</a><div style="width:2.5em;height:0.1em;background-color:#D9D9D9"></div></div><div style="position:relative;font-size:2em"><a style="text-decoration:none;color:black;opacity:1;transition:opacity 0.3s ease-out" href="/blog/">Blog</a><div style="width:2.5em;height:0.1em;background-color:#D9D9D9"></div></div></nav></div></div><div style="width:2.5em;height:0.3em;background-color:#D9D9D9"></div></header><main style="max-width:70%"><article itemscope="" itemType="http://schema.org/Article" style="padding-bottom:1em"><section><h1 itemProp="headline">Ever wondered how to connect to a sftp directly from your typescript application?</h1><p>Oct 2022<!-- --> <!-- -->#sftp #typescript #tests</p><img src="/static/17e75d0264a682ef1c93a3e5a0f7eefa/sftp.svg" alt="Thumbnail" style="max-width:400px"/></section><section><p>Nowadays, it&#x27;s way more likely that you&#x27;ll need to connect to Buckets on some cloud provider but sometimes (and it happened to me),
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 4.24.4"/><style data-href="/styles.d6b4dc9d8e481c20abde.css" data-identity="gatsby-global-css">/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{-webkit-text-size-adjust:100%;line-height:1.15}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}body{font-size:1em;line-height:1.3}</style><title data-gatsby-head="true">Ever wondered how to connect to a sftp directly from your typescript application?</title><link rel="preconnect" href="https://www.googletagmanager.com"/><link rel="dns-prefetch" href="https://www.googletagmanager.com"/><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script><link rel="sitemap" type="application/xml" href="/sitemap/sitemap-index.xml"/><link rel="icon" href="/favicon-32x32.png?v=d79107f813d41aa446d5c5d2b6200ac0" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=d79107f813d41aa446d5c5d2b6200ac0"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=d79107f813d41aa446d5c5d2b6200ac0"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div style="font-family:Syne, serif;font-style:normal;font-weight:400;padding:1em 4em"><header><div style="padding:2em 0;display:flex;align-items:baseline;justify-content:space-between;flex-flow:row"><div style="display:flex;align-items:baseline;column-gap:0.5em;flex-flow:row"><h1 style="font-size:3em;font-weight:bold;margin:0">Blog</h1></div><div><nav style="display:flex;justify-content:space-around;margin-top:2em;font-size:0.8em;column-gap:4em"><div style="position:relative;font-size:2em"><a style="text-decoration:none;color:black;opacity:1;transition:opacity 0.3s ease-out" href="/">Home</a><div style="width:2.5em;height:0.1em;background-color:#D9D9D9"></div></div><div style="position:relative;font-size:2em"><a style="text-decoration:none;color:black;opacity:1;transition:opacity 0.3s ease-out" href="/about/">About</a><div style="width:2.5em;height:0.1em;background-color:#D9D9D9"></div></div><div style="position:relative;font-size:2em"><a style="text-decoration:none;color:black;opacity:1;transition:opacity 0.3s ease-out" href="/blog/">Blog</a><div style="width:2.5em;height:0.1em;background-color:#D9D9D9"></div></div></nav></div></div><div style="width:2.5em;height:0.3em;background-color:#D9D9D9"></div></header><main style="max-width:70%"><article itemscope="" itemType="http://schema.org/Article" style="padding-bottom:1em"><section><h1 itemProp="headline">Ever wondered how to connect to a sftp directly from your typescript application?</h1><p>Oct 2022<!-- --> <!-- -->#sftp #typescript #tests</p><img src="/static/17e75d0264a682ef1c93a3e5a0f7eefa/sftp.svg" alt="Thumbnail" style="max-width:400px"/></section><section><p>Nowadays, it&#x27;s way more likely that you&#x27;ll need to connect to Buckets on some cloud provider but sometimes (and it happened to me),
 you might find yourself with the need to connect to a sftp server directly. If this is your case too, I hope this article will be able to help you set that up with an awesome test coverage.</p>
 <h2>What should I do when I try to connect to a SFTP.</h2>
 <p>First thing first, you should try to avoid doing that. If possible, you can look into how to synchronize the SFTP to a Cloud Bucket. (For example, you can look into <a href="https://aws.amazon.com/fr/aws-transfer-family/">AWS</a>)</p>
@@ -14,79 +14,117 @@ Unfortunately, it&#x27;s a bit too low level for a casual use of a sftp server (
 <div style="position:relative"><button style="position:absolute;top:0.25rem;right:0.25rem;opacity:0.3;width:2em;height:2em;cursor:pointer" data-tip="Copied to clipboard"><svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330" xml:space="preserve"><g><path d="M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15
 		c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95
 		c-8.284,0-15,6.716-15,15v165H50V30z"></path><path d="M155,120c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15s-6.716-15-15-15H155z"></path><path d="M235,180h-80c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15S243.284,180,235,180z"></path><path d="M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z
-		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip t4a13f59c-e016-42c4-9607-418aacda7b38 place-top type-dark" id="t4a13f59c-e016-42c4-9607-418aacda7b38" data-id="tooltip"><style aria-hidden="true">
-  	.t4a13f59c-e016-42c4-9607-418aacda7b38 {
+		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip te9bd770b-ea7d-4980-a705-b1354f2b0edc place-top type-success" id="te9bd770b-ea7d-4980-a705-b1354f2b0edc" data-id="tooltip"><style aria-hidden="true">
+  	.te9bd770b-ea7d-4980-a705-b1354f2b0edc {
 	    color: #fff;
-	    background: #222;
+	    background: #8DC572;
 	    border: 1px solid transparent;
+	    border-radius: undefinedpx;
+	    padding: 8px 21px;
   	}
 
-  	.t4a13f59c-e016-42c4-9607-418aacda7b38.place-top {
+  	.te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-top {
         margin-top: -10px;
     }
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-top::before {
-        border-top: 8px solid transparent;
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-top::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-top::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         bottom: -6px;
         left: 50%;
         margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
+        transform: rotate(135deg);
     }
 
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-bottom {
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-bottom {
         margin-top: 10px;
     }
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-bottom::before {
-        border-bottom: 8px solid transparent;
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-bottom::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-bottom::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         top: -6px;
         left: 50%;
         margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
+        transform: rotate(45deg);
     }
 
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-left {
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-left {
         margin-left: -10px;
     }
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-left::before {
-        border-left: 8px solid transparent;
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-left::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-left::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         right: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
+        margin-top: -6px;
+        transform: rotate(45deg);
     }
 
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-right {
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-right {
         margin-left: 10px;
     }
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-right::before {
-        border-right: 8px solid transparent;
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-right::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .t4a13f59c-e016-42c4-9607-418aacda7b38.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .te9bd770b-ea7d-4980-a705-b1354f2b0edc.place-right::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         left: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
+        margin-top: -6px;
+        transform: rotate(-135deg);
     }
   </style></div><pre class="prism-code language-shell" style="color:#9CDCFE;background-color:#1E1E1E;text-align:left;margin:1em 0;padding:0.5em;overflow-x:auto;border-radius:3px"><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">1</span><span class="token function" style="color:rgb(220, 220, 170)">npm</span><span class="token plain"> </span><span class="token function" style="color:rgb(220, 220, 170)">install</span><span class="token plain"> ssh2-sftp-client</span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">2</span><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">3</span><span class="token plain"></span><span class="token function" style="color:rgb(220, 220, 170)">yarn</span><span class="token plain"> </span><span class="token function" style="color:rgb(220, 220, 170)">add</span><span class="token plain"> ssh2-sftp-client</span></div></pre></div>
@@ -94,79 +132,117 @@ Unfortunately, it&#x27;s a bit too low level for a casual use of a sftp server (
 <div style="position:relative"><button style="position:absolute;top:0.25rem;right:0.25rem;opacity:0.3;width:2em;height:2em;cursor:pointer" data-tip="Copied to clipboard"><svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330" xml:space="preserve"><g><path d="M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15
 		c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95
 		c-8.284,0-15,6.716-15,15v165H50V30z"></path><path d="M155,120c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15s-6.716-15-15-15H155z"></path><path d="M235,180h-80c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15S243.284,180,235,180z"></path><path d="M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z
-		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip t58700263-1413-4b06-ba96-cbc2e0f1f296 place-top type-dark" id="t58700263-1413-4b06-ba96-cbc2e0f1f296" data-id="tooltip"><style aria-hidden="true">
-  	.t58700263-1413-4b06-ba96-cbc2e0f1f296 {
+		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip tfffd993a-6ddd-45a3-8ab5-542007d560b5 place-top type-success" id="tfffd993a-6ddd-45a3-8ab5-542007d560b5" data-id="tooltip"><style aria-hidden="true">
+  	.tfffd993a-6ddd-45a3-8ab5-542007d560b5 {
 	    color: #fff;
-	    background: #222;
+	    background: #8DC572;
 	    border: 1px solid transparent;
+	    border-radius: undefinedpx;
+	    padding: 8px 21px;
   	}
 
-  	.t58700263-1413-4b06-ba96-cbc2e0f1f296.place-top {
+  	.tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-top {
         margin-top: -10px;
     }
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-top::before {
-        border-top: 8px solid transparent;
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-top::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-top::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         bottom: -6px;
         left: 50%;
         margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
+        transform: rotate(135deg);
     }
 
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-bottom {
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-bottom {
         margin-top: 10px;
     }
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-bottom::before {
-        border-bottom: 8px solid transparent;
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-bottom::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-bottom::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         top: -6px;
         left: 50%;
         margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
+        transform: rotate(45deg);
     }
 
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-left {
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-left {
         margin-left: -10px;
     }
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-left::before {
-        border-left: 8px solid transparent;
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-left::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-left::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         right: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
+        margin-top: -6px;
+        transform: rotate(45deg);
     }
 
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-right {
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-right {
         margin-left: 10px;
     }
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-right::before {
-        border-right: 8px solid transparent;
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-right::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .t58700263-1413-4b06-ba96-cbc2e0f1f296.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .tfffd993a-6ddd-45a3-8ab5-542007d560b5.place-right::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         left: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
+        margin-top: -6px;
+        transform: rotate(-135deg);
     }
   </style></div><pre class="prism-code language-typescript" style="color:#9CDCFE;background-color:#1E1E1E;text-align:left;margin:1em 0;padding:0.5em;overflow-x:auto;border-radius:3px"><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">1</span><span class="token keyword" style="color:rgb(86, 156, 214)">import</span><span class="token plain"> Client </span><span class="token keyword" style="color:rgb(86, 156, 214)">from</span><span class="token plain"> </span><span class="token string" style="color:rgb(206, 145, 120)">&quot;ssh2-sftp-client&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">2</span><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">3</span><span class="token plain"></span><span class="token keyword" style="color:rgb(86, 156, 214)">const</span><span class="token plain"> client </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(86, 156, 214)">new</span><span class="token plain"> </span><span class="token class-name" style="color:rgb(78, 201, 176)">Client</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">4</span><span class="token plain"></span><span class="token keyword" style="color:rgb(86, 156, 214)">await</span><span class="token plain"> client</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:rgb(220, 220, 170)">connect</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">5</span><span class="token plain">  host</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(206, 145, 120)">&quot;127.0.0.1&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token comment" style="color:rgb(106, 153, 85)">// You sftp server IP address</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">6</span><span class="token plain">  port</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> </span><span class="token number" style="color:rgb(181, 206, 168)">9999</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token comment" style="color:rgb(106, 153, 85)">// You sftp server port</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">7</span><span class="token plain">  username</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(206, 145, 120)">&quot;test&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token comment" style="color:rgb(106, 153, 85)">// Your username</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">8</span><span class="token plain">  password</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(206, 145, 120)">&quot;test&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token comment" style="color:rgb(106, 153, 85)">// You can also opt in for private key authentication</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">9</span><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span></div></pre></div>
@@ -174,79 +250,117 @@ Unfortunately, it&#x27;s a bit too low level for a casual use of a sftp server (
 <div style="position:relative"><button style="position:absolute;top:0.25rem;right:0.25rem;opacity:0.3;width:2em;height:2em;cursor:pointer" data-tip="Copied to clipboard"><svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330" xml:space="preserve"><g><path d="M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15
 		c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95
 		c-8.284,0-15,6.716-15,15v165H50V30z"></path><path d="M155,120c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15s-6.716-15-15-15H155z"></path><path d="M235,180h-80c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15S243.284,180,235,180z"></path><path d="M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z
-		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip te60f4c08-9395-41de-9b17-1b5659cc6356 place-top type-dark" id="te60f4c08-9395-41de-9b17-1b5659cc6356" data-id="tooltip"><style aria-hidden="true">
-  	.te60f4c08-9395-41de-9b17-1b5659cc6356 {
+		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc place-top type-success" id="t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc" data-id="tooltip"><style aria-hidden="true">
+  	.t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc {
 	    color: #fff;
-	    background: #222;
+	    background: #8DC572;
 	    border: 1px solid transparent;
+	    border-radius: undefinedpx;
+	    padding: 8px 21px;
   	}
 
-  	.te60f4c08-9395-41de-9b17-1b5659cc6356.place-top {
+  	.t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-top {
         margin-top: -10px;
     }
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-top::before {
-        border-top: 8px solid transparent;
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-top::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-top::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         bottom: -6px;
         left: 50%;
         margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
+        transform: rotate(135deg);
     }
 
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-bottom {
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-bottom {
         margin-top: 10px;
     }
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-bottom::before {
-        border-bottom: 8px solid transparent;
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-bottom::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-bottom::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         top: -6px;
         left: 50%;
         margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
+        transform: rotate(45deg);
     }
 
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-left {
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-left {
         margin-left: -10px;
     }
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-left::before {
-        border-left: 8px solid transparent;
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-left::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-left::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         right: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
+        margin-top: -6px;
+        transform: rotate(45deg);
     }
 
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-right {
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-right {
         margin-left: 10px;
     }
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-right::before {
-        border-right: 8px solid transparent;
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-right::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .te60f4c08-9395-41de-9b17-1b5659cc6356.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .t22245c1e-3d2f-4f3d-aa44-3da3ff975bfc.place-right::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         left: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
+        margin-top: -6px;
+        transform: rotate(-135deg);
     }
   </style></div><pre class="prism-code language-typescript" style="color:#9CDCFE;background-color:#1E1E1E;text-align:left;margin:1em 0;padding:0.5em;overflow-x:auto;border-radius:3px"><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">1</span><span class="token comment" style="color:rgb(106, 153, 85)">// Write &quot;Content&quot; in a file on the server</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">2</span><span class="token plain"></span><span class="token keyword" style="color:rgb(86, 156, 214)">await</span><span class="token plain"> client</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:rgb(220, 220, 170)">put</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">Buffer</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:rgb(220, 220, 170)">from</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token string" style="color:rgb(206, 145, 120)">&quot;Content&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token string" style="color:rgb(206, 145, 120)">&quot;/directory/filename.extension&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">3</span><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">4</span><span class="token plain"></span><span class="token comment" style="color:rgb(106, 153, 85)">// Get back the content of the file</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">5</span><span class="token plain"></span><span class="token keyword" style="color:rgb(86, 156, 214)">const</span><span class="token plain"> content </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(86, 156, 214)">await</span><span class="token plain"> client</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:rgb(220, 220, 170)">get</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token string" style="color:rgb(206, 145, 120)">&quot;/directory/filename.extension&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">6</span><span class="token plain" style="display:inline-block">
@@ -264,79 +378,117 @@ If you&#x27;re only doing unit tests, you can probably get away by mocking the c
 <div style="position:relative"><button style="position:absolute;top:0.25rem;right:0.25rem;opacity:0.3;width:2em;height:2em;cursor:pointer" data-tip="Copied to clipboard"><svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330" xml:space="preserve"><g><path d="M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15
 		c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95
 		c-8.284,0-15,6.716-15,15v165H50V30z"></path><path d="M155,120c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15s-6.716-15-15-15H155z"></path><path d="M235,180h-80c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15S243.284,180,235,180z"></path><path d="M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z
-		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip t436e8438-5a9c-4c7c-88c9-aac436381d12 place-top type-dark" id="t436e8438-5a9c-4c7c-88c9-aac436381d12" data-id="tooltip"><style aria-hidden="true">
-  	.t436e8438-5a9c-4c7c-88c9-aac436381d12 {
+		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip t361333fb-e48b-4864-9d16-d9f66614f7d4 place-top type-success" id="t361333fb-e48b-4864-9d16-d9f66614f7d4" data-id="tooltip"><style aria-hidden="true">
+  	.t361333fb-e48b-4864-9d16-d9f66614f7d4 {
 	    color: #fff;
-	    background: #222;
+	    background: #8DC572;
 	    border: 1px solid transparent;
+	    border-radius: undefinedpx;
+	    padding: 8px 21px;
   	}
 
-  	.t436e8438-5a9c-4c7c-88c9-aac436381d12.place-top {
+  	.t361333fb-e48b-4864-9d16-d9f66614f7d4.place-top {
         margin-top: -10px;
     }
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-top::before {
-        border-top: 8px solid transparent;
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-top::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-top::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         bottom: -6px;
         left: 50%;
         margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
+        transform: rotate(135deg);
     }
 
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-bottom {
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-bottom {
         margin-top: 10px;
     }
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-bottom::before {
-        border-bottom: 8px solid transparent;
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-bottom::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-bottom::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         top: -6px;
         left: 50%;
         margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
+        transform: rotate(45deg);
     }
 
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-left {
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-left {
         margin-left: -10px;
     }
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-left::before {
-        border-left: 8px solid transparent;
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-left::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-left::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         right: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
+        margin-top: -6px;
+        transform: rotate(45deg);
     }
 
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-right {
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-right {
         margin-left: 10px;
     }
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-right::before {
-        border-right: 8px solid transparent;
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-right::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .t436e8438-5a9c-4c7c-88c9-aac436381d12.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .t361333fb-e48b-4864-9d16-d9f66614f7d4.place-right::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         left: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
+        margin-top: -6px;
+        transform: rotate(-135deg);
     }
   </style></div><pre class="prism-code language-shell" style="color:#9CDCFE;background-color:#1E1E1E;text-align:left;margin:1em 0;padding:0.5em;overflow-x:auto;border-radius:3px"><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">1</span><span class="token function" style="color:rgb(220, 220, 170)">npm</span><span class="token plain"> </span><span class="token function" style="color:rgb(220, 220, 170)">install</span><span class="token plain"> --save-dev @micham/sftp-mock-server</span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">2</span><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">3</span><span class="token plain"></span><span class="token function" style="color:rgb(220, 220, 170)">yarn</span><span class="token plain"> </span><span class="token function" style="color:rgb(220, 220, 170)">add</span><span class="token plain"> -D @micham/sftp-mock-server</span></div></pre></div>
@@ -344,98 +496,130 @@ If you&#x27;re only doing unit tests, you can probably get away by mocking the c
 <div style="position:relative"><button style="position:absolute;top:0.25rem;right:0.25rem;opacity:0.3;width:2em;height:2em;cursor:pointer" data-tip="Copied to clipboard"><svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330" xml:space="preserve"><g><path d="M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15
 		c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95
 		c-8.284,0-15,6.716-15,15v165H50V30z"></path><path d="M155,120c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15s-6.716-15-15-15H155z"></path><path d="M235,180h-80c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15S243.284,180,235,180z"></path><path d="M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z
-		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip tce186096-425c-4c73-a2a2-7d7b6223e823 place-top type-dark" id="tce186096-425c-4c73-a2a2-7d7b6223e823" data-id="tooltip"><style aria-hidden="true">
-  	.tce186096-425c-4c73-a2a2-7d7b6223e823 {
+		"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button><div class="__react_component_tooltip t946752eb-dab0-45da-804a-105eddf8217a place-top type-success" id="t946752eb-dab0-45da-804a-105eddf8217a" data-id="tooltip"><style aria-hidden="true">
+  	.t946752eb-dab0-45da-804a-105eddf8217a {
 	    color: #fff;
-	    background: #222;
+	    background: #8DC572;
 	    border: 1px solid transparent;
+	    border-radius: undefinedpx;
+	    padding: 8px 21px;
   	}
 
-  	.tce186096-425c-4c73-a2a2-7d7b6223e823.place-top {
+  	.t946752eb-dab0-45da-804a-105eddf8217a.place-top {
         margin-top: -10px;
     }
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-top::before {
-        border-top: 8px solid transparent;
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-top::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-top::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         bottom: -6px;
         left: 50%;
         margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
+        transform: rotate(135deg);
     }
 
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-bottom {
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-bottom {
         margin-top: 10px;
     }
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-bottom::before {
-        border-bottom: 8px solid transparent;
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-bottom::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 18px;
+        height: 10px;
     }
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-bottom::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         top: -6px;
         left: 50%;
         margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
+        transform: rotate(45deg);
     }
 
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-left {
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-left {
         margin-left: -10px;
     }
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-left::before {
-        border-left: 8px solid transparent;
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-left::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-left::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         right: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
+        margin-top: -6px;
+        transform: rotate(45deg);
     }
 
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-right {
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-right {
         margin-left: 10px;
     }
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-right::before {
-        border-right: 8px solid transparent;
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-right::before {
+        content: "";
+        background-color: inherit;
+        position: absolute;
+        z-index: 2;
+        width: 10px;
+        height: 18px;
     }
-    .tce186096-425c-4c73-a2a2-7d7b6223e823.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+    .t946752eb-dab0-45da-804a-105eddf8217a.place-right::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-top-right-radius: undefinedpx;
+        border: 1px solid transparent;
+        background-color: #8DC572;
+        z-index: 1;
         left: -6px;
         top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
+        margin-top: -6px;
+        transform: rotate(-135deg);
     }
   </style></div><pre class="prism-code language-typescript" style="color:#9CDCFE;background-color:#1E1E1E;text-align:left;margin:1em 0;padding:0.5em;overflow-x:auto;border-radius:3px"><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 1</span><span class="token function" style="color:rgb(220, 220, 170)">describe</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token string" style="color:rgb(206, 145, 120)">&quot;MySFTPClient&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 2</span><span class="token plain">  </span><span class="token keyword" style="color:rgb(86, 156, 214)">let</span><span class="token plain"> mockServer</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Server</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 3</span><span class="token plain">  </span><span class="token function" style="color:rgb(220, 220, 170)">beforeEach</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token keyword" style="color:rgb(86, 156, 214)">async</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 4</span><span class="token plain">    mockServer </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(86, 156, 214)">await</span><span class="token plain"> </span><span class="token function" style="color:rgb(220, 220, 170)">createSftpMockServer</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 5</span><span class="token plain">      port</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(206, 145, 120)">&quot;9999&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 6</span><span class="token plain">      hostname</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(206, 145, 120)">&quot;127.0.0.1&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 7</span><span class="token plain">      </span><span class="token function-variable function" style="color:rgb(220, 220, 170)">debug</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">msg</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> </span><span class="token builtin" style="color:rgb(86, 156, 214)">string</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">=&gt;</span><span class="token plain"> logger</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:rgb(220, 220, 170)">debug</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">msg</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 8</span><span class="token plain">    </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3"> 9</span><span class="token plain">  </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">10</span><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">11</span><span class="token plain">  </span><span class="token function" style="color:rgb(220, 220, 170)">afterEach</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token keyword" style="color:rgb(86, 156, 214)">async</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">12</span><span class="token plain">    </span><span class="token keyword" style="color:rgb(86, 156, 214)">await</span><span class="token plain"> </span><span class="token function" style="color:rgb(220, 220, 170)">closeServer</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">mockServer</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">13</span><span class="token plain">  </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">14</span><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">15</span><span class="token plain">  </span><span class="token function" style="color:rgb(220, 220, 170)">it</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token string" style="color:rgb(206, 145, 120)">&quot;should be able to write file to the SFTP server&quot;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">16</span><span class="token plain">    </span><span class="token comment" style="color:rgb(106, 153, 85)">// GIVEN</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">17</span><span class="token plain">    </span><span class="token keyword" style="color:rgb(86, 156, 214)">const</span><span class="token plain"> client </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(86, 156, 214)">new</span><span class="token plain"> </span><span class="token class-name" style="color:rgb(78, 201, 176)">MySFTPClient</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">18</span><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">19</span><span class="token plain">    </span><span class="token comment" style="color:rgb(106, 153, 85)">// WHEN</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">20</span><span class="token plain">    </span><span class="token keyword" style="color:rgb(86, 156, 214)">const</span><span class="token plain"> result </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"> client</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:rgb(220, 220, 170)">doMyThingUsingSftp</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">21</span><span class="token plain" style="display:inline-block">
-</span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">22</span><span class="token plain">    </span><span class="token comment" style="color:rgb(106, 153, 85)">// THEN check result</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">23</span><span class="token plain">  </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">24</span><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span></div></pre></div></section></article><footer><div><div>linkedin:<a href="https://www.linkedin.com/in/mmollard/">https://www.linkedin.com/in/mmollard/</a></div><div>blog :<a href="https://mollardmichael.github.io/blog">https://mollardmichael.github.io/blog</a></div></div></footer></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
-  
-  
-  if(true) {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  }
-  if (typeof ga === "function") {
-    ga('create', 'G-K9PP50WDBQ', 'auto', {});
+</span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">22</span><span class="token plain">    </span><span class="token comment" style="color:rgb(106, 153, 85)">// THEN check result</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">23</span><span class="token plain">  </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span><span class="token plain"></span></div><div class="token-line" style="color:#9CDCFE"><span style="display:inline-block;width:2em;user-select:none;opacity:0.3">24</span><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">;</span></div></pre></div></section></article><footer><div><div>linkedin:<a href="https://www.linkedin.com/in/mmollard/">https://www.linkedin.com/in/mmollard/</a></div><div>blog :<a href="https://mollardmichael.github.io/blog">https://mollardmichael.github.io/blog</a></div></div></footer></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-K9PP50WDBQ"></script><script>
       
       
-      
-      
-      
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blog/sftp-mock-server";window.___webpackCompilationHash="db4359634523ec7a6207";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-c936ef8d0bbaacbd0bed.js"],"app":["/app-c976ae63b7972ccd0ebf.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-7c606f97d15943083f4d.js"],"component---src-pages-about-tsx":["/component---src-pages-about-tsx-1a9cd0260ae813868ef7.js"],"component---src-pages-blog-tsx":["/component---src-pages-blog-tsx-bae5943397239410b9a8.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-495405e4d229d5c657b4.js"],"component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-blog-sftp-mock-server-sftp-mock-server-mdx":["/component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-blog-sftp-mock-server-sftp-mock-server-mdx-67b97e5d260dd2ad73f0.js"],"component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-projects-wallets-integrate-wallets-mdx":["/component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-projects-wallets-integrate-wallets-mdx-0d7ca60149baab09d24d.js"]};/*]]>*/</script><script src="/polyfill-c936ef8d0bbaacbd0bed.js" nomodule=""></script><script src="/app-c976ae63b7972ccd0ebf.js" async=""></script><script src="/framework-9bd5f55576cb7e79c732.js" async=""></script><script src="/webpack-runtime-1169c3bbdde0c9784b60.js" async=""></script></body></html>
+      if(true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer && window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-K9PP50WDBQ', {"send_page_view":false});
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blog/sftp-mock-server";window.___webpackCompilationHash="a05166bda85fa9b3ab6b";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-c936ef8d0bbaacbd0bed.js"],"app":["/app-7188bf74728d099ef711.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-9509433c882610a11ca0.js"],"component---src-pages-about-tsx":["/component---src-pages-about-tsx-cd93359409df163ee3f0.js"],"component---src-pages-blog-tsx":["/component---src-pages-blog-tsx-4b470f450c831feff4ab.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-80372e98b4387553803f.js"],"component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-blog-mock-graphql-endpoints-mock-graphql-endpoints-mdx":["/component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-blog-mock-graphql-endpoints-mock-graphql-endpoints-mdx-824d10b0339d4ae40613.js"],"component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-blog-sftp-mock-server-sftp-mock-server-mdx":["/component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-blog-sftp-mock-server-sftp-mock-server-mdx-67b97e5d260dd2ad73f0.js"],"component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-projects-wallets-integrate-wallets-mdx":["/component---src-templates-blog-template-tsx-content-file-path-users-michaelm-code-homepage-content-projects-wallets-integrate-wallets-mdx-0d7ca60149baab09d24d.js"]};/*]]>*/</script><script src="/polyfill-c936ef8d0bbaacbd0bed.js" nomodule=""></script><script src="/app-7188bf74728d099ef711.js" async=""></script><script src="/framework-9bd5f55576cb7e79c732.js" async=""></script><script src="/webpack-runtime-329d5987e16d66c549ee.js" async=""></script></body></html>
